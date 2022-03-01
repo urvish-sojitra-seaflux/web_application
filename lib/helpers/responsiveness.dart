@@ -10,13 +10,12 @@ class ResponsiveWidget extends StatelessWidget {
   final Widget mediumScreen;
   final Widget smallScreen;
 
-  const ResponsiveWidget(
-      @required this.largeScreen, this.mediumScreen, @required this.smallScreen,
+  const ResponsiveWidget(this.largeScreen, this.mediumScreen, this.smallScreen,
       {Key? key})
       : super(key: key);
 
   static bool isSmallScreen(BuildContext context) =>
-      MediaQuery.of(context).size.width < smallScreenSize;
+      MediaQuery.of(context).size.width < mediumScreenSize;
 
   static bool isLargeScreen(BuildContext context) =>
       MediaQuery.of(context).size.width >= largeScreenSize;
@@ -33,13 +32,18 @@ class ResponsiveWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
       double _width = constraints.maxWidth;
-      if (_width >= largeScreenSize) {
-        return largeScreen;
-      } else if (_width < largeScreenSize && _width >= mediumScreenSize) {
-        return mediumScreen ?? largeScreen;
-      } else {
-        return smallScreen ?? largeScreen;
-      }
+      // if (_width >= largeScreenSize) {
+      //   return largeScreen;
+      // } else if (_width < largeScreenSize && _width >= mediumScreenSize) {
+      //   return  mediumScreen ? Container() : largeScreen;
+      // } else {
+      //   return smallScreen ?? largeScreen;
+      // }
+      return _width >= largeScreenSize
+          ? largeScreen
+          : _width < largeScreenSize && _width >= mediumScreenSize
+              ? mediumScreen
+              : smallScreen;
     });
   }
 }

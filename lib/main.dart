@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:web_application/controllers/menu_controller.dart';
 import 'package:web_application/layout.dart';
 
 void main() {
+  Get.put(MenuController());
   runApp(const MyApp());
 }
 
